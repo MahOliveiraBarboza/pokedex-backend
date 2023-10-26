@@ -26,6 +26,17 @@ public class PokemonDetail {
         this.abilities = abilities;
     }
 
+    public PokemonDetail() {
+    }
+
+    public PokemonSprites getSprites() {
+        return sprites;
+    }
+
+    public void setSprites(PokemonSprites sprites) {
+        this.sprites = sprites;
+    }
+
     public String getName() {
         return name;
     }
@@ -56,5 +67,21 @@ public class PokemonDetail {
 
     public void setWeight(Float weight) {
         this.weight = weight;
-    }    
+    }
+
+    public List<PokemonTypes> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<PokemonTypes> types) {
+        this.types = types;
+    }
+
+    public List<PokemonAbilities> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<PokemonAbilities> abilities) {
+        this.abilities = abilities;
+    }
 }

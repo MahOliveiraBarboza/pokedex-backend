@@ -11,6 +11,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException;
 import com.pokemon.marcela.infrastructure.domain.PokemonDetail;
 import com.pokemon.marcela.infrastructure.domain.PokemonListResponse;
+import com.pokemon.marcela.infrastructure.domain.PokemonResponse;
 import com.pokemon.marcela.infrastructure.gateways.InterfacePokemonGateway;
 import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
@@ -28,7 +29,13 @@ public class PokemonAdapter implements InterfacePokemonGateway {
     public PokemonListResponse getAllPokemons(String limit, String offset) {
         try {
             LOGGER.info("[PokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokkemons");
-            return pokemonGateway.getAllPokemons(limit, offset);
+             PokemonListResponse pokemonListResponse = pokemonGateway.getAllPokemons(limit, offset);
+
+            for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
+                PokemonDetail pokemonDetail = pokemonGateway.getDetailPokemon(pokemonResponse.getName());
+                pokemonResponse.setImageUrl(pokemonDetail.getSprites().getImagePokemon()); // adiciona a URL da imagem
+            }
+            return pokemonListResponse;
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "[PokemonAdapter:getAllPokemons] Erro aos pegar os dados", e);
             throw new GetPokemonException(e.getMessage());

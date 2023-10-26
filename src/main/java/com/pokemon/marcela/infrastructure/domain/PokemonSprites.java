@@ -12,11 +12,11 @@ public class PokemonSprites {
 
     public PokemonSprites() {}
 
-    public String getImage() {
+    public String getImagePokemon() {
         return imagePokemon;
     }
 
-    public void setImage(String imagePokemon) {
+    public void getImagePokemon(String imagePokemon) {
         this.imagePokemon = imagePokemon;
     }
 }

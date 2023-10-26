@@ -9,7 +9,13 @@ public class PokemonListResponse {
         this.results = results;
     }
 
-    public List<PokemonResponse> getResult() {
+    public PokemonListResponse() {}
+
+    public List<PokemonResponse> getResults() {
         return results;
+    }
+
+    public void setResults(List<PokemonResponse> results) {
+        this.results = results;
     }
 }

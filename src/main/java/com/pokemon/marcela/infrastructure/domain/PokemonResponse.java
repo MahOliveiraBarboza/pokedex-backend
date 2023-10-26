@@ -3,6 +3,7 @@ package com.pokemon.marcela.infrastructure.domain;
 public class PokemonResponse {
     private String name;
     private String url;
+    private String imageUrl;
 
     public PokemonResponse(String name, String url) {
         this.name = name;
@@ -23,5 +24,13 @@ public class PokemonResponse {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
