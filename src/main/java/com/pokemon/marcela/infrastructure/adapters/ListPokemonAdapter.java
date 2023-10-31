@@ -12,23 +12,23 @@ import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException
 import com.pokemon.marcela.infrastructure.domain.PokemonDetail;
 import com.pokemon.marcela.infrastructure.domain.PokemonListResponse;
 import com.pokemon.marcela.infrastructure.domain.PokemonResponse;
-import com.pokemon.marcela.infrastructure.gateways.InterfacePokemonGateway;
+import com.pokemon.marcela.infrastructure.gateways.InterfaceListPokemonGateway;
 import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
 @Singleton
-public class PokemonAdapter implements InterfacePokemonGateway {
-    private static final Logger LOGGER = Logger.getLogger(PokemonAdapter.class.getName());
+public class ListPokemonAdapter implements InterfaceListPokemonGateway {
+    private static final Logger LOGGER = Logger.getLogger(ListPokemonAdapter.class.getName());
     private final PokemonGateway pokemonGateway;
 
     @Inject
-    public PokemonAdapter(@RestClient PokemonGateway pokemonGateway) {
+    public ListPokemonAdapter(@RestClient PokemonGateway pokemonGateway) {
         this.pokemonGateway = pokemonGateway;
     }
 
     @Override
     public PokemonListResponse getAllPokemons(String limit, String offset) {
         try {
-            LOGGER.info("[PokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokkemons");
+            LOGGER.info("[ListPokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokkemons");
              PokemonListResponse pokemonListResponse = pokemonGateway.getAllPokemons(limit, offset);
 
             for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
@@ -37,21 +37,9 @@ public class PokemonAdapter implements InterfacePokemonGateway {
             }
             return pokemonListResponse;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "[PokemonAdapter:getAllPokemons] Erro aos pegar os dados", e);
+            LOGGER.log(Level.SEVERE, "[ListPokemonAdapter:getAllPokemons] Erro aos pegar os dados", e);
             throw new GetPokemonException(e.getMessage());
         }
         
     }
-
-    @Override
-    public PokemonDetail getDetailPokemon(String pokemonName) {
-        try {
-            LOGGER.info("[PokemonAdapter:getDetailPokemon] Começando a pegar os dadosde detalhes dos pokkemons");
-            return pokemonGateway.getDetailPokemon(pokemonName);
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "[PokemonAdapter:getDetailPokemon] Erro aos pegar os dados de detalhes", e);
-            throw new GetPokemonException(e.getMessage());
-        }
-    }
-
 }
