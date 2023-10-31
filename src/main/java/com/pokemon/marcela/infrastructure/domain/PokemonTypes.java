@@ -4,7 +4,7 @@ import java.util.List;
 import javax.json.bind.annotation.JsonbProperty;
 
 public class PokemonTypes {
-    @JsonbProperty("ability")
+    @JsonbProperty("type")
     private List<PokemonType> types;
 
     private PokemonType name;

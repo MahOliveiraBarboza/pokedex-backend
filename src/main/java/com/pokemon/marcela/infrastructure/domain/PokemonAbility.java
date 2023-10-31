@@ -10,6 +10,9 @@ public class PokemonAbility {
         this.name = name;
     }
 
+    public PokemonAbility() {
+    }
+
     public String getName() {
         return name;
     }

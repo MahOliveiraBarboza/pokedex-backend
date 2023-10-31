@@ -10,6 +10,9 @@ public class PokemonType {
         this.name = name;
     }
 
+    public PokemonType() {
+    }
+
     public String getName() {
         return name;
     }
