@@ -33,7 +33,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
 
             for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
                 PokemonDetail pokemonDetail = pokemonGateway.getDetailPokemon(pokemonResponse.getName());
-                pokemonResponse.setImageUrl(pokemonDetail.getSprites().getImagePokemon()); // adiciona a URL da imagem
+                pokemonDetail.getSprites().setImagePokemon(pokemonDetail.getSprites().getImagePokemon());; // adiciona a URL da imagem
             }
             return pokemonListResponse;
         } catch (Exception e) {

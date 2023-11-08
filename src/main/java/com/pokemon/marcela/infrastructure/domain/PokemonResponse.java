@@ -1,13 +1,19 @@
 package com.pokemon.marcela.infrastructure.domain;
 
+import javax.json.bind.annotation.JsonbProperty;
+
 public class PokemonResponse {
+    @JsonbProperty("name")
     private String name;
+    @JsonbProperty("url")
     private String url;
-    private String imageUrl;
 
     public PokemonResponse(String name, String url) {
         this.name = name;
         this.url = url;
+    }
+
+    public PokemonResponse() {
     }
 
     public String getName() {
@@ -24,13 +30,5 @@ public class PokemonResponse {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

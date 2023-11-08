@@ -82,12 +82,12 @@
         </dependencies>
         <configuration>
           <targetClasses>
-            <param>com.pokemon.renato.*</param>
+            <param>com.pokemon.marcela.*</param>
           </targetClasses>
           <excludedClasses>
-            <param>com.pokemon.renato.domain.*</param>
-            <param>com.pokemon.renato.infrastructure.pokeapi.domain.*</param>
-            <param>com.pokemon.renato.infrastructure.pokeapi.gateways.*</param>
+            <param>com.pokemon.marcela.domain.*</param>
+            <param>com.pokemon.marcela.infrastructure.domain.*</param>
+            <param>com.pokemon.marcela.infrastructure.gateways.*</param>
           </excludedClasses>
         </configuration>
       </plugin>

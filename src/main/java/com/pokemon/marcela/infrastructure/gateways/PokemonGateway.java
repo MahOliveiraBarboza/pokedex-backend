@@ -20,7 +20,7 @@ public interface PokemonGateway {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    PokemonListResponse getAllPokemons(@QueryParam("limit=10") @DefaultValue("10") String limit, @QueryParam("offset") @DefaultValue("0") String offset);
+    PokemonListResponse getAllPokemons(@QueryParam("limit") String limit, @QueryParam("offset") String offset);
 
     @GET
     @Path("/{pokemonName}")

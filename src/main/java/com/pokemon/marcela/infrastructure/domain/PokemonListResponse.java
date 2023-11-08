@@ -2,14 +2,19 @@ package com.pokemon.marcela.infrastructure.domain;
 
 import java.util.List;
 
-public class PokemonListResponse {
-     private List<PokemonResponse> results;
+import javax.json.bind.annotation.JsonbProperty;
 
-     public PokemonListResponse(List<PokemonResponse> results) {
+public class PokemonListResponse {
+    @JsonbProperty("results")
+    private List<PokemonResponse> results;
+
+    public PokemonListResponse(List<PokemonResponse> results) {
         this.results = results;
     }
 
-    public PokemonListResponse() {}
+    public PokemonListResponse() {
+        
+    }
 
     public List<PokemonResponse> getResults() {
         return results;

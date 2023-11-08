@@ -12,11 +12,15 @@ import com.pokemon.marcela.infrastructure.domain.entities.PokemonListEntity;
 @ApplicationScoped
 public class ListPokemonMapper {
     
-     public List<PokemonListEntity> mapPokemonListResponseToPokemonListEntity(PokemonListResponse pokemonListResponse) {
+    public List<PokemonListEntity> mapPokemonListResponseToPokemonListEntity(PokemonListResponse pokemonListResponse) {
         List<PokemonListEntity> pokemonListEntityList = new ArrayList<>();
         for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
-            String id = extractIdFromUrl(pokemonResponse.getUrl()); // Extrai o id do Pokemon a partir da URL
-            pokemonListEntityList.add(new PokemonListEntity(id, pokemonResponse.getName(), pokemonResponse.getImageUrl()));
+            String id = extractIdFromUrl(pokemonResponse.getUrl());
+    
+            // Adiciona a URL da imagem default do Pokemon a propriedade "imagePokemon"
+            String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
+            
+            pokemonListEntityList.add(new PokemonListEntity(id, pokemonResponse.getName(), imageUrl));
         }
         return pokemonListEntityList;
     }

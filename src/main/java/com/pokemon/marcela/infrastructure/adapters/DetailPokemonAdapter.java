@@ -22,10 +22,10 @@ public class DetailPokemonAdapter implements InterfaceDetailPokemonGateway{
         this.pokemonGateway = pokemonGateway;
     }
 
-     @Override
+    @Override
     public PokemonDetail getDetailPokemon(String pokemonName) {
         try {
-            LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dadosde detalhes dos pokkemons");
+            LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokkemons");
             return pokemonGateway.getDetailPokemon(pokemonName);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "[DetailPokemonAdapter:getDetailPokemon] Erro aos pegar os dados de detalhes", e);

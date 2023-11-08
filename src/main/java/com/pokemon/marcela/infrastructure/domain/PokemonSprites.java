@@ -10,13 +10,15 @@ public class PokemonSprites {
         this.imagePokemon = imagePokemon;
     }
 
-    public PokemonSprites() {}
+    public PokemonSprites() {
+        
+    }
 
     public String getImagePokemon() {
         return imagePokemon;
     }
 
-    public void getImagePokemon(String imagePokemon) {
+    public void setImagePokemon(String imagePokemon) {
         this.imagePokemon = imagePokemon;
     }
 }

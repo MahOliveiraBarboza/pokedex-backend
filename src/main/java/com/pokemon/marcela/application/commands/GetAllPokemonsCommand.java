@@ -5,7 +5,6 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 import com.pokemon.marcela.application.mapper.ListPokemonMapper;
 import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException;
 import com.pokemon.marcela.infrastructure.domain.PokemonListResponse;
@@ -20,7 +19,7 @@ public class GetAllPokemonsCommand {
     private static final String OFFSET = "0";
 
     @Inject
-    public GetAllPokemonsCommand(@RestClient InterfaceListPokemonGateway listPokemonGateway, ListPokemonMapper listPokemonMapper) {
+    public GetAllPokemonsCommand(InterfaceListPokemonGateway listPokemonGateway, ListPokemonMapper listPokemonMapper) {
         this.listPokemonGateway = listPokemonGateway;
         this.listPokemonMapper = listPokemonMapper;
     }
