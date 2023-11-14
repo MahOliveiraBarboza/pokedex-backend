@@ -92,14 +92,14 @@ class GetAllPokemonsCommandTest {
     }     
 
     @Nested
-    @DisplayName("And thrown exception")
-    class ExceptionThrownTest {
+    @DisplayName("And throw exception")
+    class ExceptionThrowTest {
         String LIMIT = "10";
         String OFFSET = "0";
 
         @BeforeEach
         void mockAndAct() throws Exception  {
-             when(interfaceListPokemonGatewayMock.getAllPokemons(LIMIT, OFFSET)).thenThrow(new RuntimeException("Erro ao obter lista de Pokémons"));
+             when(interfaceListPokemonGatewayMock.getAllPokemons(LIMIT, OFFSET)).thenThrow(new GetPokemonException("Erro ao obter lista de Pokémons"));
         }
 
         @Test
