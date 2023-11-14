@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import com.pokemon.marcela.application.mapper.ListPokemonMapper;
 import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException;
 import com.pokemon.marcela.infrastructure.domain.PokemonListResponse;
