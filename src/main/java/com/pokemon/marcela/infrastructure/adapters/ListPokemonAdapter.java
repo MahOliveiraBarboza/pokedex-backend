@@ -28,7 +28,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
     @Override
     public PokemonListResponse getAllPokemons(String limit, String offset) {
         try {
-            LOGGER.info("[ListPokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokkemons");
+            LOGGER.info("[ListPokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokemons");
              PokemonListResponse pokemonListResponse = pokemonGateway.getAllPokemons(limit, offset);
 
             for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
@@ -37,7 +37,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
             }
             return pokemonListResponse;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "[ListPokemonAdapter:getAllPokemons] Erro aos pegar os dados", e);
+            LOGGER.log(Level.SEVERE, "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons", e);
             throw new GetPokemonException(e.getMessage());
         }
         

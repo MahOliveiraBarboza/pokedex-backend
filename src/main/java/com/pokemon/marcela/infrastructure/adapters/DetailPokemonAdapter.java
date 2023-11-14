@@ -14,18 +14,19 @@ import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
 @Singleton
 public class DetailPokemonAdapter implements InterfaceDetailPokemonGateway{
-    private static final Logger LOGGER = Logger.getLogger(DetailPokemonAdapter.class.getName());
+    private Logger LOGGER = Logger.getLogger(DetailPokemonAdapter.class.getName());
     private final PokemonGateway pokemonGateway;
 
     @Inject
-    public DetailPokemonAdapter(@RestClient PokemonGateway pokemonGateway) {
+    public DetailPokemonAdapter(@RestClient PokemonGateway pokemonGateway, Logger logger) {
         this.pokemonGateway = pokemonGateway;
+        this.LOGGER = logger;
     }
 
     @Override
     public PokemonDetail getDetailPokemon(String pokemonName) {
         try {
-            LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokkemons");
+            LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokemons");
             return pokemonGateway.getDetailPokemon(pokemonName);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "[DetailPokemonAdapter:getDetailPokemon] Erro aos pegar os dados de detalhes", e);
