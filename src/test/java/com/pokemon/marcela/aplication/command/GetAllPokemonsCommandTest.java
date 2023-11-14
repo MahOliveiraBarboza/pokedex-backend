@@ -26,8 +26,6 @@ import com.pokemon.marcela.infrastructure.gateways.InterfaceListPokemonGateway;
 import java.util.List;
 import org.mockito.Mock;
 
-// Nesse exemplo, estamos usando a anotação `@ExtendWith(MockitoExtension.class)` para indicar que queremos utilizar a extensão `MockitoExtension` para executar os testes. Em seguida, utilizamos as anotações `@Mock` e `@InjectMocks` para criar o objeto mock 
-
 @DisplayName("Given GetAllPokemonsCommand")
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
