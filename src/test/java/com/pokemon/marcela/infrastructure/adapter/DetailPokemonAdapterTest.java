@@ -1,15 +1,11 @@
 package com.pokemon.marcela.infrastructure.adapter;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.*;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
@@ -34,11 +30,11 @@ import org.mockito.Mockito;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class DetailPokemonAdapterTest {
 
-    @Mock
-    Logger mockLogger;
-
     @InjectMocks
     DetailPokemonAdapter detailPokemonAdapter;
+
+    @Mock
+    Logger mockLogger;
 
     @Mock
     PokemonGateway pokemonGatewayMock;
@@ -46,13 +42,8 @@ class DetailPokemonAdapterTest {
     @BeforeEach
     public void resetAndMockLogger() throws Exception {
         reset(pokemonGatewayMock);
-        Logger mockLogger = Mockito.mock(Logger.class);
-    }
-
-    @BeforeEach
-    void setUp() {
         reset(mockLogger);
-        reset(pokemonGatewayMock);
+        Logger mockLogger = Mockito.mock(Logger.class);
     }
 
     @Nested
@@ -122,27 +113,10 @@ class DetailPokemonAdapterTest {
             @Test
             @DisplayName("Then fail log should be called correctly")
             void getDetailFailLog() {
-                verify(mockLogger, times(1)).log(eq(Level.SEVERE), eq("[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes"), any(GetPokemonException.class));
+                verify(mockLogger, times(1)).severe(
+                        "[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");
             }
         }
     }
 
 }
-
-// @Test
-// void testGetDetailPokemonException() {
-// // Dado
-// String pokemonName = "Pikachu";
-// String errorMessage = "Erro ao buscar os detalhes do Pokémon";
-
-// // Quando
-// when(pokemonGateway.getDetailPokemon(pokemonName)).thenThrow(new
-// GetPokemonException(errorMessage));
-
-// // Então
-// GetPokemonException exception = assertThrows(GetPokemonException.class, () ->
-// detailPokemonAdapter.getDetailPokemon(pokemonName));
-// assertEquals(errorMessage, exception.getMessage());
-// verify(mockLogger).log(Level.SEVERE, "[DetailPokemonAdapter:getDetailPokemon]
-// Erro aos pegar os dados de detalhes", any(GetPokemonException.class));
-// }

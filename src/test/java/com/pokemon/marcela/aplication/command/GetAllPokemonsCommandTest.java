@@ -96,18 +96,24 @@ class GetAllPokemonsCommandTest {
     class ExceptionThrowTest {
         String LIMIT = "10";
         String OFFSET = "0";
+        String errorMessage = "Não foi possível obter a lista de pokémons: ";
+        GetPokemonException thrownException;
 
         @BeforeEach
         void mockAndAct() throws Exception  {
-             when(interfaceListPokemonGatewayMock.getAllPokemons(LIMIT, OFFSET)).thenThrow(new GetPokemonException("Erro ao obter lista de Pokémons"));
+             when(interfaceListPokemonGatewayMock.getAllPokemons(LIMIT, OFFSET)).thenThrow(new GetPokemonException("Ocorreu um erro ao obter a lista de pokémons"));
+
+             try {
+                getAllPokemonsCommand.execute();
+            } catch (GetPokemonException e) {
+                thrownException = e;
+            }
         }
 
         @Test
         @DisplayName("Then throw GetPokemonException")
         void executeThrowsGetPokemonException() {
-            assertThrows(GetPokemonException.class, () ->
-                getAllPokemonsCommand.execute()
-            );
+            assertEquals("Não foi possível obter a lista de pokémons: Ocorreu um erro ao obter a lista de pokémons", thrownException.getMessage());
         }
     }
 }

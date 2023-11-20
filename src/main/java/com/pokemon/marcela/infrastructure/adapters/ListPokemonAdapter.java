@@ -1,7 +1,6 @@
 package com.pokemon.marcela.infrastructure.adapters;
 
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -17,12 +16,13 @@ import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
 @Singleton
 public class ListPokemonAdapter implements InterfaceListPokemonGateway {
-    private static final Logger LOGGER = Logger.getLogger(ListPokemonAdapter.class.getName());
+    private Logger LOGGER = Logger.getLogger(ListPokemonAdapter.class.getName());
     private final PokemonGateway pokemonGateway;
 
     @Inject
-    public ListPokemonAdapter(@RestClient PokemonGateway pokemonGateway) {
+    public ListPokemonAdapter(@RestClient PokemonGateway pokemonGateway, Logger logger) {
         this.pokemonGateway = pokemonGateway;
+        this.LOGGER = logger;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
             }
             return pokemonListResponse;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons", e);
+            LOGGER.severe("[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
             throw new GetPokemonException(e.getMessage());
         }
         

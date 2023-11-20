@@ -1,6 +1,5 @@
 package com.pokemon.marcela.infrastructure.adapters;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,7 +28,7 @@ public class DetailPokemonAdapter implements InterfaceDetailPokemonGateway{
             LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokemons");
             return pokemonGateway.getDetailPokemon(pokemonName);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "[DetailPokemonAdapter:getDetailPokemon] Erro aos pegar os dados de detalhes", e);
+            LOGGER.severe("[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");
             throw new GetPokemonException(e.getMessage());
         }
     }

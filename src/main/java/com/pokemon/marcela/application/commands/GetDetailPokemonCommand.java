@@ -25,7 +25,7 @@ public class GetDetailPokemonCommand {
             PokemonDetail pokemonDetail = pokemonGateway.getDetailPokemon(pokemonName);
             return pokemonMapper.mapPokemonDetailToPokemonEntity(pokemonDetail);
         } catch (Exception e) {
-            throw new GetPokemonException("Não foi possível obter o card de detalhes do pokémon: " +e.getMessage());
+            throw new GetPokemonException("Não foi possível obter o card de detalhes do pokémon: " + e.getMessage());
         }
     }
 }

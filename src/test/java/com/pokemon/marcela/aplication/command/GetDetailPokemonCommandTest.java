@@ -88,18 +88,23 @@ class GetDetailPokemonCommandTest {
     @DisplayName("And thrown exception")
     class ExceptionThrownTest {
         String pokemonNameMock = "pokemonName";
+        GetPokemonException thrownException;
 
         @BeforeEach
         void mockAndAct() throws Exception  {
-             when(interfaceDetailPokemonGatewayMock.getDetailPokemon(pokemonNameMock)).thenThrow(new RuntimeException("Não foi possível obter o card de detalhes do pokémon"));
+             when(interfaceDetailPokemonGatewayMock.getDetailPokemon(pokemonNameMock)).thenThrow(new GetPokemonException("Ocorreu um erro ao obter a lista de pokémons"));
+
+             try {
+                getDetailPokemonCommand.execute(pokemonNameMock);
+            } catch (GetPokemonException e) {
+                thrownException = e;
+            }
         }
 
         @Test
         @DisplayName("Then throw GetPokemonException")
         void executeThrowsGetPokemonExceptionTest() {
-            assertThrows(GetPokemonException.class, () ->
-                getDetailPokemonCommand.execute(pokemonNameMock)
-            );
+            assertEquals("Não foi possível obter o card de detalhes do pokémon: Ocorreu um erro ao obter a lista de pokémons", thrownException.getMessage());
         }
     }
 }
