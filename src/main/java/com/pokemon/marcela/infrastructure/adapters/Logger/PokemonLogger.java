@@ -1,6 +1,5 @@
 package com.pokemon.marcela.infrastructure.adapters.Logger;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PokemonLogger {
@@ -11,6 +10,6 @@ public class PokemonLogger {
     }   
 
     public void error(String message, Throwable exception) {
-        LOGGER.log(Level.SEVERE, message, exception);
+        LOGGER.severe(message);
      }
 }

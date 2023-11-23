@@ -1,10 +1,14 @@
 package com.pokemon.marcela.infrastructure.adapter;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +23,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.pokemon.marcela.infrastructure.adapters.ListPokemonAdapter;
+import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException;
+import com.pokemon.marcela.infrastructure.domain.PokemonDetail;
 import com.pokemon.marcela.infrastructure.domain.PokemonListResponse;
+import com.pokemon.marcela.infrastructure.domain.PokemonResponse;
+import com.pokemon.marcela.infrastructure.domain.PokemonSprites;
 import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
 
@@ -53,19 +61,44 @@ class ListPokemonAdapterTest {
         class SuccessFullyGetAllTest {
             PokemonListResponse pokemonListResponse;
             PokemonListResponse result;
-            String limitMok = "limit";
-            String offsetMok = "offset";
+            String limitMok = "20";
+            String offsetMok = "0";
 
             @BeforeEach
             void mockAndAct() {
-                pokemonListResponse = new PokemonListResponse();
+                PokemonResponse pokemonResponse = new PokemonResponse();
+                pokemonResponse.setName("Bulbasaur");
+                pokemonResponse.setUrl("https://pokeapi.co/api/v2/pokemon/1/");
+
+                PokemonListResponse pokemonListResponse = new PokemonListResponse();
+                List<PokemonResponse> pokemonResponses = new ArrayList<>();
+                pokemonResponses.add(pokemonResponse);
+                pokemonListResponse.setResults(pokemonResponses);
+
+                PokemonDetail pokemonDetail = new PokemonDetail();
+                PokemonSprites sprites = new PokemonSprites();
+                sprites.setImagePokemon("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
+                pokemonDetail.setSprites(sprites);
+
+
                 when(pokemonGatewayMock.getAllPokemons(limitMok, offsetMok)).thenReturn(pokemonListResponse);
 
-                result = listPokemonAdapter.getAllPokemons(limitMok, offsetMok);
+                when(pokemonGatewayMock.getDetailPokemon("Bulbasaur")).thenReturn(pokemonDetail);
+
+                PokemonListResponse result = listPokemonAdapter.getAllPokemons(limitMok, offsetMok);
             }
 
+            @Test
+            @DisplayName("Then getAllPokemons is called from from the gateway")
+            void gatewayGetAllPokemonsTest() {
+                verify(pokemonGatewayMock, times(1)).getAllPokemons(limitMok, offsetMok);
+            }
 
-
+            @Test
+            @DisplayName("Then return pokemonListResponse")
+            void getAllReturnpokemonListResponseTest() {
+                assertEquals(pokemonListResponse, result);
+            }
 
             @Test
             @DisplayName("Then success log should be called correctly")
@@ -74,5 +107,38 @@ class ListPokemonAdapterTest {
                         "[ListPokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokemons");
             }
         }
+
+        @Nested
+        @DisplayName("And thows exception")
+        class ExceptionThrowTest {
+            String limitMok = "limit";
+            String offsetMok = "offset";
+            String errorMessage = "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons";
+            GetPokemonException thrownException;
+
+            @BeforeEach
+            void mockAndAct() throws Exception {
+                when(pokemonGatewayMock.getAllPokemons(limitMok, offsetMok)).thenThrow(new RuntimeException(errorMessage));
+
+                try {
+                    listPokemonAdapter.getAllPokemons(limitMok, offsetMok);
+                } catch (GetPokemonException e) {
+                    thrownException = e;
+                }
+            }
+
+            @Test
+            @DisplayName("Then throw GetPokemonException")
+            void shouldThrowGetPokemonException() {
+                assertEquals(errorMessage, thrownException.getMessage());
+            }
+
+            @Test
+            @DisplayName("Then fail log should be called correctly")
+            void geAllFailLog() {
+                verify(mockLogger, times(1)).severe(
+                    "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
+            }
+        }
     }
-}
+} 
