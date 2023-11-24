@@ -13,19 +13,20 @@ import com.pokemon.marcela.infrastructure.domain.entities.PokemonListEntity;
 public class ListPokemonMapper {
     
     public List<PokemonListEntity> mapPokemonListResponseToPokemonListEntity(PokemonListResponse pokemonListResponse) {
-        List<PokemonListEntity> pokemonListEntityList = new ArrayList<>();
+        List<PokemonListEntity> newPokemonListEntity = new ArrayList<>();
         for (PokemonResponse pokemonResponse : pokemonListResponse.getResults()) {
             String id = extractIdFromUrl(pokemonResponse.getUrl());
+            String name = pokemonResponse.getName();
     
             // Adiciona a URL da imagem default do Pokemon a propriedade "imagePokemon"
             String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
             
-            pokemonListEntityList.add(new PokemonListEntity(id, pokemonResponse.getName(), imageUrl));
+            newPokemonListEntity.add(new PokemonListEntity(id, name, imageUrl));
         }
-        return pokemonListEntityList;
+        return newPokemonListEntity;
     }
    
-    private String extractIdFromUrl(String url) {
+    public String extractIdFromUrl(String url) {
         String[] urlParts = url.split("/");
         return urlParts[urlParts.length - 1];
     }
