@@ -16,13 +16,12 @@ import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
 @Singleton
 public class ListPokemonAdapter implements InterfaceListPokemonGateway {
-    private Logger LOGGER = Logger.getLogger(ListPokemonAdapter.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ListPokemonAdapter.class.getName());
     private final PokemonGateway pokemonGateway;
 
     @Inject
-    public ListPokemonAdapter(@RestClient PokemonGateway pokemonGateway, Logger logger) {
+    public ListPokemonAdapter(@RestClient PokemonGateway pokemonGateway) {
         this.pokemonGateway = pokemonGateway;
-        this.LOGGER = logger;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
             }
             return pokemonListResponse;
         } catch (Exception e) {
-            // LOGGER.severe("[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
+            LOGGER.severe("[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
             throw new GetPokemonException(e.getMessage());
         }
         

@@ -22,8 +22,8 @@ import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException
 import com.pokemon.marcela.infrastructure.domain.PokemonDetail;
 import com.pokemon.marcela.infrastructure.gateways.PokemonGateway;
 
+import static com.pokemon.marcela.TestUtil.getLoggerMock;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 @DisplayName("Given DetailPokemonAdapter")
 @ExtendWith(MockitoExtension.class)
@@ -33,7 +33,6 @@ class DetailPokemonAdapterTest {
     @InjectMocks
     DetailPokemonAdapter detailPokemonAdapter;
 
-    @Mock
     Logger mockLogger;
 
     @Mock
@@ -41,9 +40,9 @@ class DetailPokemonAdapterTest {
 
     @BeforeEach
     public void resetAndMockLogger() throws Exception {
+        mockLogger = getLoggerMock(DetailPokemonAdapter.class);
         reset(pokemonGatewayMock);
         reset(mockLogger);
-        Logger mockLogger = Mockito.mock(Logger.class);
     }
 
     @Nested
@@ -110,12 +109,12 @@ class DetailPokemonAdapterTest {
                 assertEquals(errorMessage, thrownException.getMessage());
             }
 
-            /* @Test
+            @Test
             @DisplayName("Then fail log should be called correctly")
             void getDetailFailLog() {
                 verify(mockLogger, times(1)).severe(
                         "[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");
-            } */
+            }
         }
     }
 

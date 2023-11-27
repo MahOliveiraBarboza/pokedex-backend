@@ -19,9 +19,9 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static com.pokemon.marcela.TestUtil.getLoggerMock;
 import com.pokemon.marcela.infrastructure.adapters.ListPokemonAdapter;
 import com.pokemon.marcela.infrastructure.adapters.exception.GetPokemonException;
 import com.pokemon.marcela.infrastructure.domain.PokemonDetail;
@@ -39,7 +39,6 @@ class ListPokemonAdapterTest {
     @InjectMocks
     ListPokemonAdapter listPokemonAdapter;
 
-    @Mock
     Logger mockLogger;
 
     @Mock
@@ -47,9 +46,9 @@ class ListPokemonAdapterTest {
 
     @BeforeEach
     public void resetAndMockLogger() throws Exception {
+        mockLogger = getLoggerMock(ListPokemonAdapter.class);
         reset(pokemonGatewayMock);
         reset(mockLogger);
-        Logger mockLogger = Mockito.mock(Logger.class);
     }
 
     @Nested
@@ -133,12 +132,12 @@ class ListPokemonAdapterTest {
                 assertEquals(errorMessage, thrownException.getMessage());
             }
 
-            /* @Test
+            @Test
             @DisplayName("Then fail log should be called correctly")
             void geAllFailLog() {
                 verify(mockLogger, times(1)).severe(
                     "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
-            } */
+            }
         }
     }
 } 
