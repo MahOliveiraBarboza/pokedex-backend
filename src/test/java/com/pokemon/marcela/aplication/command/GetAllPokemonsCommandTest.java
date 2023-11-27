@@ -43,11 +43,6 @@ class GetAllPokemonsCommandTest {
         reset(pokemonMapperMock);
     }
 
-    // @BeforeEach
-    // public void setup() {
-    //     getAllPokemonsCommand = new GetAllPokemonsCommand(interfaceListPokemonGatewayMock, pokemonMapperMock);
-    // }
-
     @Nested
     @DisplayName("When execute is called")
     class ExecuteCallListTest{

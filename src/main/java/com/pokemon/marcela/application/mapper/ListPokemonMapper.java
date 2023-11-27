@@ -18,7 +18,6 @@ public class ListPokemonMapper {
             String id = extractIdFromUrl(pokemonResponse.getUrl());
             String name = pokemonResponse.getName();
     
-            // Adiciona a URL da imagem default do Pokemon a propriedade "imagePokemon"
             String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
             
             newPokemonListEntity.add(new PokemonListEntity(id, name, imageUrl));
