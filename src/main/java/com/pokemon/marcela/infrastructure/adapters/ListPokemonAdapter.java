@@ -37,7 +37,7 @@ public class ListPokemonAdapter implements InterfaceListPokemonGateway {
             }
             return pokemonListResponse;
         } catch (Exception e) {
-            LOGGER.severe("[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
+            // LOGGER.severe("[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
             throw new GetPokemonException(e.getMessage());
         }
         

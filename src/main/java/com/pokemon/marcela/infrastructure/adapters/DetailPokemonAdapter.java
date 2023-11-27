@@ -28,7 +28,7 @@ public class DetailPokemonAdapter implements InterfaceDetailPokemonGateway{
             LOGGER.info("[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokemons");
             return pokemonGateway.getDetailPokemon(pokemonName);
         } catch (Exception e) {
-            LOGGER.severe("[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");
+            // LOGGER.severe("[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");
             throw new GetPokemonException(e.getMessage());
         }
     }

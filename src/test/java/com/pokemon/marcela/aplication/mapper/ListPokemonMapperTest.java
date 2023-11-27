@@ -93,8 +93,8 @@ class ListPokemonMapperTest {
         }
 
         @Test
-        @DisplayName("Then return createPokemonList")
-        void createPokemonListTest() {
+        @DisplayName("Then return mapPokemonListResponseToPokemonListEntity")
+        void returnMethodMapTest() {
             assertTrue(EqualsBuilder.reflectionEquals(expectedPokemonList, result));
         }
     }
