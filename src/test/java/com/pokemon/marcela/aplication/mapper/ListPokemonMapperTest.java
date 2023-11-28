@@ -105,7 +105,7 @@ class ListPokemonMapperTest {
 
         @Test
         @DisplayName("Then extractIdFromUrl returns id correctly")
-        void shouldExtractIdFromUrl() {
+        void extractIdFromUrl() {
             String url = "https://pokeapi.co/api/v2/pokemon/1/";
             String id = listPokemonMapper.extractIdFromUrl(url);
 

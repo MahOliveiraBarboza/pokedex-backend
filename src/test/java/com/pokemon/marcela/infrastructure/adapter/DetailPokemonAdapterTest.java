@@ -77,7 +77,7 @@ class DetailPokemonAdapterTest {
             }
 
             @Test
-            @DisplayName("Then success log should be called correctly")
+            @DisplayName("Then success log is called correctly")
             void getDetailSuccessLog() {
                 verify(mockLogger, times(1)).info(
                         "[DetailPokemonAdapter:getDetailPokemon] Começando a pegar os dados de detalhes dos pokemons");
@@ -105,12 +105,12 @@ class DetailPokemonAdapterTest {
 
             @Test
             @DisplayName("Then throw GetPokemonException")
-            void shouldThrowGetPokemonException() {
+            void throwGetPokemonException() {
                 assertEquals(errorMessage, thrownException.getMessage());
             }
 
             @Test
-            @DisplayName("Then fail log should be called correctly")
+            @DisplayName("Then fail log is called correctly")
             void getDetailFailLog() {
                 verify(mockLogger, times(1)).severe(
                         "[DetailPokemonAdapter:getDetailPokemon] Erro ao pegar os dados de detalhes");

@@ -100,7 +100,7 @@ class ListPokemonAdapterTest {
             }
 
             @Test
-            @DisplayName("Then success log should be called correctly")
+            @DisplayName("Then success log is called correctly")
             void getAllSuccessLog() {
                 verify(mockLogger, times(1)).info(
                         "[ListPokemonAdapter:getAllPokemons] Começando a pegar os dados dos pokemons");
@@ -128,12 +128,12 @@ class ListPokemonAdapterTest {
 
             @Test
             @DisplayName("Then throw GetPokemonException")
-            void shouldThrowGetPokemonException() {
+            void throwGetPokemonException() {
                 assertEquals(errorMessage, thrownException.getMessage());
             }
 
             @Test
-            @DisplayName("Then fail log should be called correctly")
+            @DisplayName("Then fail log is called correctly")
             void geAllFailLog() {
                 verify(mockLogger, times(1)).severe(
                     "[ListPokemonAdapter:getAllPokemons] Erro aos pegar a lista de pokemons");
